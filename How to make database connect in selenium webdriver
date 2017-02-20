@@ -11,7 +11,7 @@ public class db_test_script {
 		
 		//Loading the required JDBC Driver class
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		Connection conn = DriverManager.getConnection("jdbc:sqlserver://DBNAME Here:1433;DatabaseName=MIS_DB;user= '' ;Password= ''"); 
+		Connection conn = DriverManager.getConnection("jdbc:sqlserver://'DBServerName':1433;DatabaseName= 'DBName';user= '';Password= ''"); 
 		//Executing SQL query and fetching the result
 		Statement st = conn.createStatement();
 		
