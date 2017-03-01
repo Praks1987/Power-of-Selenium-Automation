@@ -1,0 +1,23 @@
+package FireFox_GeckoDriver;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class FireFox_GeckoDriver {
+
+	static WebDriver driver;
+	
+	// Here we set GeckoDriver path Latest version of 
+	// Firefox Browser can not run without this GeckoDriver
+	
+	static String driverPath = "c:\\geckodriver\\geckodriver.exe";
+
+	public static void main(String[] args)
+	{
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.gecko.driver", driverPath);
+		driver = new FirefoxDriver();
+	  	driver.manage().window().maximize();
+	  	driver.get("http://www.mtbc.com");
+	}
+
+}
