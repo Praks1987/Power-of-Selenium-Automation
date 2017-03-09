@@ -1,0 +1,33 @@
+package firefoxprofile;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import com.gargoylesoftware.htmlunit.javascript.host.file.File;
+
+public class firefoxprofile 
+{
+
+	public static void main(String[] args) 
+	{
+		//Load firefox from non default location
+		System.setProperty("webdriver.firefox.bin", "mentioned path here");
+		FirefoxProfile fp = new FirefoxProfile();
+		
+		 /*
+		 * //load firefox with addons if you want with
+		 * 
+		 * File file = new File("path/to/extension.xpi");
+		 * fp.addExtension(file);
+		 * 
+		 */
+		 
+		//For other setting of browser profile 
+		DesiredCapabilities dc = new DesiredCapabilities();
+		dc.setCapability(FirefoxDriver.PROFILE, fp);
+		WebDriver driver = new RemoteWebDriver(dc);
+		driver.close();	
+	}
+}
