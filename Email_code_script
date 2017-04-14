@@ -1,0 +1,69 @@
+package email_03;
+
+import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.*;
+import com.sun.mail.smtp.*;
+
+	public class email_03 {
+
+		//static BodyPart messageBodyPart;
+		
+	    public static void main(String args[]) throws Exception {
+	    	
+	    	
+	        Properties props = System.getProperties();
+	        props.put("mail.smtp.host","172.16.0.14");
+	        props.put("mail.smtp.port",25);
+	        props.put("mail.smtps.auth","true");
+	        Session session = Session.getInstance(props, null);
+	        
+	        MimeMessage msg = new MimeMessage(session);
+	        MimeBodyPart bodyPart = new MimeBodyPart();
+	        Multipart multipart = new MimeMultipart();
+	    
+	        
+	        msg.setFrom(new InternetAddress("kalimriaz@mtbc.com"));
+	        msg.addRecipients(Message.RecipientType.CC, "kalimriaz@mtbc.com");
+	        msg.addRecipients(Message.RecipientType.TO, "kalimriaz@mtbc.com");
+	        
+	      
+	       
+	        
+	        //msg.setRecipients(Message.RecipientType.TO,InternetAddress.parse("kalimriaz@mtbc.com", false));
+	        msg.setSubject("Selenium Report For you Review");
+	        msg.setText("Hi,\n\n Here you may find the excuted test case report for today Iteration \n\n Thanks \n" +
+	          "\n Best Regards \nKalim Riaz \n Lead SQA Web \n\n");
+	
+	         //Multipart multipart = new MimeMultipart();
+	        
+
+	         // Set text message part
+	         ///multipart.addBodyPart(messageBodyPart);
+
+	         // Part two is attachment
+	         // messageBodyPart = new MimeBodyPart();
+	        
+	         //String filename = "D:/SQLQuery1.sql";
+	         //DataSource source = new FileDataSource(filename);
+	         //msg.setDataHandler(new DataHandler(source));
+	         //msg.setFileName(filename);
+	         //multipart.addBodyPart(messageBodyPart);
+	        
+	         //msg.setContent(multipart);
+	         
+	        
+	        bodyPart.attachFile("D:/SQLQuery1.sql");
+	        //multipart.addBodyPart(bodyPart);
+	        msg.setContent(multipart);
+	        
+	        SMTPTransport t = (SMTPTransport)session.getTransport("smtp"); 
+	        t.connect("IP here", "", "");
+	        t.sendMessage(msg, msg.getAllRecipients());
+	        System.out.println("Response: " + t.getLastServerResponse());
+	        t.close();
+	    }
+	}
