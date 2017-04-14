@@ -1,0 +1,23 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class testing {
+
+    public static void main(String[] args) throws InterruptedException {
+        
+//    System.setProperty("webdriver.chrome.driver","C:\\\\Users\\wurehman\\Downloads\\chromedriver_win32\\chromedriver.exe");
+    System.setProperty("webdriver.gecko.driver", "E:\\driver\\geckodriver.exe");
+    WebDriver driver = new FirefoxDriver();
+    driver.get("https://www.google.com/maps");
+    WebElement search = driver.findElement(By.id("searchboxinput"));
+    search.sendKeys("Murree road");
+    Thread.sleep(1000);
+    WebElement wb = driver.findElement(By.className("searchbox-searchbutton"));
+    wb.click();
+    
+        }
+    
+    }
