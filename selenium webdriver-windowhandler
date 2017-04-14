@@ -1,0 +1,10 @@
+       
+       
+       String subWindowHandler = null;
+	     Set<String> handles = driver.getWindowHandles();
+	     Iterator<String> iterator = handles.iterator();
+	     while (iterator.hasNext())
+	    	 
+	     {subWindowHandler = iterator.next();}
+	     
+	     driver.switchTo().window(subWindowHandler);
