@@ -1,0 +1,72 @@
+package Daily_Task;
+import java.io.IOException;
+
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import excel_append.excel_writing_class;
+import pms_login_script.pms_login_script;
+
+public class Daily_Task {
+
+	private static WebDriver driver;
+	
+	public WebDriver  Daily_checker (WebDriver driver) throws InterruptedException, RowsExceededException, WriteException, IOException, BiffException
+	{
+		// TODO Auto-generated method stub
+		
+		
+		pms_login_script Login_Check = new pms_login_script ();
+		driver = Login_Check.pms_login_script_checker(driver);
+		
+		excel_writing_class excel_write = new excel_writing_class();
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A2']")).click();
+		Thread.sleep(1000);
+		
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_Li2_DFC']/div/span")).click();
+		Thread.sleep(1000);
+		excel_write.normal_excel_writing("18", "ctl00_lbl_reporttitle", "Daily Work Confirmation", 0, 19, driver);
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A2']")).click();
+		
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_Li2_DFB']/div/span")).click();
+		Thread.sleep(1000);
+		excel_write.normal_excel_writing("19", "ctl00_lbl_reporttitle", "Download Forms & Bills", 0, 20, driver);
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A2']")).click();
+		
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_Li2_MSDOB']/div/span")).click();
+		Thread.sleep(3000);
+		excel_write.normal_excel_writing("20", "ctl00_lbl_reporttitle", "Missing DOS", 0, 21, driver);
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A2']")).click();
+		
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_Li2_PTL']/div/span")).click();
+		Thread.sleep(1000);
+		excel_write.normal_excel_writing("21", "ctl00_lbl_reporttitle", "Pending Transaction List", 0, 22, driver);
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A2']")).click();
+	
+		
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_Li2_SMDOB']/div/span")).click();
+		Thread.sleep(1000);
+		excel_write.normal_excel_writing("22", "ctl00_lbl_reporttitle", "Subscribers' Missing DOB", 0, 23, driver);
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A2']")).click();
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_li_RejectedClaims']/div/span")).click();
+		Thread.sleep(1000);
+		excel_write.normal_excel_writing("23", "ctl00_lbl_reporttitle", "Subscribers' Missing DOB", 0, 24, driver);
+		//driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A2']")).click();
+		
+		Thread.sleep(1000);
+		driver.findElement(By.id("ctl00_Img1")).click();
+		return driver;
+	}
+
+}
