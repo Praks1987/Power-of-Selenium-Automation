@@ -1,0 +1,116 @@
+package Appointment_Final_Script_Create;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.Set;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+import org.junit.After;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import excel_append.excel_writing_class;
+import pms_login_script.pms_login_script;
+
+public class Appointment_Final_Script_Create 
+{
+	
+	  private static WebDriver driver;
+	  private static boolean acceptNextAlert = true;
+	  private static StringBuffer verificationErrors = new StringBuffer();
+	
+	  public static void main(String[] args) throws InterruptedException, RowsExceededException, WriteException, IOException, BiffException 
+	
+	  {
+		  
+		pms_login_script Login_Check = new pms_login_script();
+		driver = Login_Check.pms_login_script_checker(driver);
+		Thread.sleep(1000);
+		
+		excel_writing_class excel_write= new excel_writing_class();
+		
+		driver.findElement(By.id("ctl00_mainnavigation1_A1")).click();
+		driver.findElement(By.xpath("//*[@id='Scheduler_li']/ul/li[1]/a/div/span")).click();
+	     
+	     
+		/*driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_popSDateStd_Control")).click();
+		Thread.sleep(1000);
+	     
+	     //String text_with_value = driver.findElement(By.xpath("//span[@onclick='objPopCalList[0].dateSelected=21;objPopCalList[0].monthSelected=11;objPopCalList[0].yearSelected=2017;PopCalCloseCalendar(0);']")).getText();
+	     //driver.findElement(By.xpath("//span[@onclick='objPopCalList[0].dateSelected=26;objPopCalList[0].monthSelected=11;objPopCalList[0].yearSelected=2016;PopCalCloseCalendar(0);']")).click();
+	     //Thread.sleep(3000);
+	     //System.out.println(text_with_value);
+
+	     driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_lnkAddNewApp")).click();
+	     Thread.sleep(1000);
+	     
+	     //driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_panelMultiPLHeader")).click();
+	     //driver.findElement(By.id("btnSubmitMultiPL")).click();
+	     // Thread.sleep(1000);
+	     
+	     String subWindowHandler = null;
+	     Set<String> handles = driver.getWindowHandles();
+	     Iterator<String> iterator = handles.iterator();
+	     while (iterator.hasNext())
+	    	 
+	     {subWindowHandler = iterator.next();}
+	     
+	     driver.switchTo().window(subWindowHandler);
+	     //System.out.println(subWindowHandler+ driver.getTitle());
+	     //driver.findElement(By.id("chkRemCApp")).click();
+	    
+	     driver.findElement(By.id("radOldPat")).click();
+	     
+	     
+	     driver.findElement(By.id("txtLastNameAddApp")).click();
+	     driver.findElement(By.id("txtLastNameAddApp")).clear();
+	     driver.findElement(By.id("txtLastNameAddApp")).sendKeys("Test");
+	     driver.findElement(By.id("btnSearchOldPat")).click();
+	     Thread.sleep(1000);
+	     driver.findElement(By.xpath("//tr[@id='0']/td[2]")).click();
+	     Thread.sleep(1000);
+	     new Select(driver.findElement(By.id("ddlTimeAddApp"))).selectByVisibleText("[12:40 PM]");
+	     driver.findElement(By.id("btnSaveAndClose")).click();
+	     excel_write.append_write("17", "btnSaveAndClose", "Appointment added successfully", 0, 18, driver);
+	     Thread.sleep(2000);
+	     assertEquals("Appointment added successfully", closeAlertAndGetItsText());
+	     Thread.sleep(3000);
+	     
+	     //excel_write.normal_excel_writing("17", "btnSaveAndClose", "Appointment added successfully", 0, 18, driver); */
+	    // driver.navigate().to("https://secure7.mtbc.com/scheduler/appointments/Daily_View_Optimized.aspx");
+	     driver.findElement(By.id("ctl00_Img1")).click();
+	     System.out.println("Hello i am clicked");
+	     Thread.sleep(1000);
+	     //driver.findElement(By.cssSelector("#logOutMain > ul.Scheduler > li > a > div.innerAtag > span.s12ARB")).click();
+	     //driver.close();
+
+	   }
+	 @After
+	  public void tearDown() throws Exception 
+	  {
+	    driver.quit();
+	    String verificationErrorString = verificationErrors.toString();
+	    if (!"".equals(verificationErrorString)) {
+	      fail(verificationErrorString);
+	    }
+	  }
+	 private static String closeAlertAndGetItsText() 
+	 {
+		    try {
+		      Alert alert = driver.switchTo().alert();
+		      String alertText = alert.getText();
+		      if (acceptNextAlert) {
+		        alert.accept();
+		      } else {
+		        alert.dismiss();
+		      }
+		      return alertText;
+		    } finally {
+		      acceptNextAlert = true;
+	   }
+	} 
+	 
+}
