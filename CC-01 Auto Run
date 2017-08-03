@@ -1,0 +1,58 @@
+package care_connector;
+
+import java.io.IOException;
+
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import pms_login_script.pms_login_script;
+
+public class care_connector_auto 
+{
+	
+	public WebDriver careconnector_checker (WebDriver driver) throws InterruptedException, RowsExceededException, WriteException, IOException, BiffException
+	{
+		// TODO Auto-generated method stub
+
+		pms_login_script Login_Check = new pms_login_script ();
+		driver = Login_Check.pms_login_script_checker(driver);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A7']")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A9']/div/span")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A7']")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_li_WellNessVisit_a']/div/span")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A7']")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_AFollowup37']/div/span")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A7']")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_li_FluShot_a']/div/span")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A7']")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A55']/div/span")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_Img1']")).click();
+		Thread.sleep(1000);
+		return driver;
+	}
+	
+}
