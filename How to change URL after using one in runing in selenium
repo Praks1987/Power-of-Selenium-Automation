@@ -1,0 +1,101 @@
+package new_rx;
+
+import java.util.concurrent.TimeUnit;
+import org.junit.After;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class new_rx {
+
+	  private static WebDriver driver;
+	  private static String baseUrl;
+	  private static String baseUrl02;
+	  private static boolean acceptNextAlert = true;
+	  
+	  
+	public WebDriver  newrx_checker (WebDriver driver) throws InterruptedException
+	{
+	
+		// TODO Auto-generated method stub
+
+		driver = new FirefoxDriver();
+		driver.manage().window().maximize();
+		baseUrl = "http://www.google.com/";	
+		baseUrl02 = "www.yahoo.com";
+		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);  
+		driver.get(baseUrl);
+		driver.findElement(By.xpath("(//a[contains(text(),'Login')])[2]")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.id("user")).click();
+		driver.findElement(By.id("user")).clear();
+		driver.findElement(By.id("user")).sendKeys("User_name");
+		Thread.sleep(1000);
+		    
+		driver.findElement(By.id("password")).click();
+		driver.findElement(By.id("password")).clear();
+		driver.findElement(By.id("password")).sendKeys("Password");
+		Thread.sleep(1000);
+		     
+		driver.findElement(By.id("btnSubmit")).click();
+		
+		if (driver.findElement(By.id("btnContinue")).isDisplayed())
+		{
+			driver.findElement(By.id("btnContinue")).click();
+			assertEquals("Thank you for your interest", closeAlertAndGetItsText());
+			driver.findElement(By.id("ctl00_lblSignInUser")).click();
+			Thread.sleep(1000);
+			System.out.println("Hello i am in side loop");
+		}
+		else 
+		{
+			String script = "window.location = \'"+baseUrl02+"\'";
+			((JavascriptExecutor) driver).executeScript(script);
+		}
+		
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A2']"));
+		action.moveToElement(we).moveToElement(driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A2']"))).click().build().perform();
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_li_NewRx']/div/span")).click();
+		return driver;
+		
+	}
+	
+	private static void assertEquals(String string,
+			String closeAlertAndGetItsText) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@After             
+	  public void Ending() {    
+	          try{    
+	            driver.close();
+	            Thread.sleep(3000);
+	             }
+	         catch(Exception b){
+	            b.getMessage();
+	             }
+	   }
+	  private static String closeAlertAndGetItsText() {
+		try {
+	      Alert alert = driver.switchTo().alert();
+	      String alertText = alert.getText();
+	      if (acceptNextAlert) {
+	        alert.accept();
+	      } else {
+	        alert.dismiss();
+	      }
+	      return alertText;
+	    } finally {
+	      acceptNextAlert = true;
+	    }
+	  }	
+}
