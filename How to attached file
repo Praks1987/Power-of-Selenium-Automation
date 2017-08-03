@@ -1,0 +1,38 @@
+package file_attached;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class file_attached 
+{
+	  private static WebDriver driver;
+	  private static String baseUrl;
+	  
+	public static void main(String[] args)
+	
+	{
+		// TODO Auto-generated method stub
+
+		    driver = new FirefoxDriver();
+		    baseUrl = "http://toolsqa.com/automation-practice-form";
+		    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
+		    
+		    driver.get(baseUrl);
+		    
+		    driver.findElement(By.id("photo")).clear();
+		    //driver.findElement(By.id("photo")).click();
+		    driver.findElement(By.id("photo")).sendKeys("C:\\Users\\kalimriaz\\Desktop\\Gmail_task.txt");
+		    
+		    WebElement element = driver.findElement(By.id("anything"));
+		    new Actions(driver).click(element).perform();
+		    
+		
+		    
+	}
+
+}
