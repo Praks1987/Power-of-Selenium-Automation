@@ -1,0 +1,88 @@
+package excel_sheet_writing;
+
+import java.io.IOException;
+
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class excel_sheet_writing 
+{
+	
+	   	Label sr_no =null; 
+	    Label Report_name =null; 
+	    Label testcase_status =null;
+
+	public void excel_method (String i ,String report_id, String report_name , WebDriver driver , int col_report , int row_report , WritableSheet sheet) throws InterruptedException ,IOException, RowsExceededException, WriteException
+
+	{
+		String test = report_id;
+	   
+		if(driver.findElement(By.xpath("//*[@id='"+test+"']")).getText().equalsIgnoreCase(report_name))
+	    {
+			//driver.findElement(By.id("BtnDisplay")).click();
+			System.out.println("Report Name :" + report_name);
+			
+			sr_no= 					new Label (col_report		, row_report 	, 	i);
+			Report_name= 			new Label (col_report + 1	, row_report	, 	report_name);
+			testcase_status= 		new Label (col_report + 2	, row_report 	, 	"Pass");
+			
+			sheet.addCell(sr_no);
+			sheet.addCell(Report_name);
+			sheet.addCell(testcase_status);
+			System.out.println("After Excel Write");
+			
+	    }
+
+		else
+	    {
+			sr_no= 					new Label (col_report	, row_report 	, 	i);
+			Report_name= 			new Label (col_report+1	, row_report	, 	report_name);
+			testcase_status= 		new Label (col_report+2	, row_report 	, 	"Fail");
+			
+			sheet.addCell(sr_no);
+			sheet.addCell(Report_name);
+			sheet.addCell(testcase_status);
+			
+			System.out.println("I am not here in second class");
+	    }
+		} 
+
+	
+	
+	public void login_excle (String i, String element_id,String test_case , int col_report , int row_report ,WebDriver driver, WritableSheet sheet) throws InterruptedException ,IOException, RowsExceededException, WriteException
+	{
+		String Checker_token = element_id;
+		
+		Boolean isPresent = driver.findElements(By.xpath("//*[@id='"+Checker_token+"']")).size() > 0;
+		if(isPresent)
+		{
+
+			sr_no= 					new Label (col_report		, row_report 	, 	i);
+			Report_name= 			new Label (col_report + 1	, row_report	, 	test_case);
+			testcase_status= 		new Label (col_report + 2	, row_report 	, 	"Pass");
+			
+			sheet.addCell(sr_no);
+			sheet.addCell(Report_name);
+			sheet.addCell(testcase_status);
+			System.out.println("After Excel Write");
+		
+		}
+		else
+		{
+			sr_no= 					new Label (col_report	, row_report 	, 	i);
+			Report_name= 			new Label (col_report+1	, row_report	, 	test_case);
+			testcase_status= 		new Label (col_report+2	, row_report 	, 	"Fail");
+			
+			sheet.addCell(sr_no);
+			sheet.addCell(Report_name);
+			sheet.addCell(testcase_status);
+			
+			System.out.println("I am not here in second class");
+		}
+		
+	}
+}
