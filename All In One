@@ -1,0 +1,82 @@
+package final_demo_as;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+
+public class final_demo_as
+{
+	private static WebDriver driver;
+	private static String baseUrl;
+	
+	
+public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException, RowsExceededException, WriteException 
+{
+		
+
+ /* ============================================== Browser Initialize Here ============================================== */
+/* ==================================================================================================================== */
+	
+	driver = new FirefoxDriver();   //Opening the firefox driver
+	driver.manage().window().maximize(); //maximizing the opened window
+
+
+/* ============================================== Application Opening Here ============================================== */
+/* ===================================================================================================================== */
+
+	baseUrl= "http://www.google.com/";     
+	driver.get(baseUrl);      //opening of desired URL
+  
+/* ============================================== Taking the screenshot ============================================== */
+/* =================================================================================================================== */
+/*
+	File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	FileUtils.copyFile(scrFile, new File("c:\\Automation Testing ScreenShot\\screenshot.png"));
+
+
+/* ==============================================Database connection ============================================== */
+/* =============================================================================================================== */
+
+	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	Connection conn = DriverManager.getConnection("jdbc:sqlserver://DB_server_Name:Port;DatabaseName=" ";user=" ";Password= " ""); 
+	Statement st = conn.createStatement();
+	String sqlStr = "select * From patient where patient_name lie  '%kalim%'";
+	ResultSet rs = st.executeQuery(sqlStr);
+	while (rs.next()) 
+	{
+		System.out.println(rs.getString("patient_name"));
+	}
+
+/* ============================================== Excel columns Writing ============================================== */
+/* ================================================================================================================== */
+
+	WritableWorkbook workbook = Workbook.createWorkbook(new File("D:\\pms_login_write.xls"));
+	WritableSheet sheet = workbook.createSheet("Sheet1", 0);
+	Label testcase_status_01 =null;
+	Label testcase_status_02 =null;
+
+	testcase_status_01 = 		new Label(0, 0, "Test Case");
+	testcase_status_02 = 		new Label(1, 0, "Status");
+ 
+	sheet.addCell(testcase_status_01);
+	sheet.addCell(testcase_status_02);
+	workbook.write(); 
+	workbook.close(); 	
+	}
+
+
+}
