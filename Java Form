@@ -1,0 +1,939 @@
+package Automation_Pannel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+import new_rx.new_rx;
+import org.openqa.selenium.WebDriver;
+import claim_scripts.claim_scripts;
+import administration_section.administration_section_auto;
+import care_connector.care_connector_auto;
+import demographics_final.demographics_script_final;
+import Appointment_Final_Script_Create.Appointment_Final_Script_Create_auto;
+import Daily_Task.Daily_Task;
+import PM_Dashboard.PM_Dashboard;
+import Patient_list.Patient_list;
+import pms_login_script.pms_login_script;
+import refer_a_colleague.refer_a_colleague;
+import reports_scripting.reports_scripting;
+import ssc_script.ssc_script;
+import webpro_auto.webpro_auto;
+
+@SuppressWarnings("serial")
+public class Automation_Pannel  extends JFrame implements ActionListener
+{
+	final  boolean shouldFill = true;
+	final  boolean shouldWeightX = true;
+	final  boolean RIGHT_TO_LEFT = false;
+	static JLabel l;
+	private static WebDriver driver;
+	
+		public void addComponentsToPane(Container pane) 
+		{
+			if (RIGHT_TO_LEFT) {
+				pane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+			}
+
+			JButton button;
+			pane.setLayout(new GridBagLayout());
+			GridBagConstraints c = new GridBagConstraints();
+			if (shouldFill) {
+				c.fill = GridBagConstraints.HORIZONTAL;
+			}
+
+			// ********************************* Labels Formatting******************************* //
+			//********************************************************************************** //
+			
+			l = new JLabel(" ");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 1.5;
+			c.gridx = 1;
+			c.gridy = 1;
+			pane.add(l, c);
+			
+			l = new JLabel(" ");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 1.5;
+			c.gridx = 1;
+			c.gridy = 1;
+			pane.add(l, c);
+			
+			l = new JLabel(" ");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 1.5;
+			c.gridx = 1;
+			c.gridy = 1;
+			pane.add(l, c);
+			
+			l = new JLabel(" ");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 1.5;
+			c.gridx = 1;
+			c.gridy = 0;
+			c.weighty=.2;
+			pane.add(l, c);
+			
+			l = new JLabel(" ");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 1.5;
+			c.gridx = 1;
+			c.gridy = 0;
+			pane.add(l, c);
+			
+			l = new JLabel(" ");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 1.5;
+			c.gridx = 1;
+			c.gridy = 0;
+			c.weighty=.2;
+			pane.add(l, c);
+			
+			l = new JLabel(" ");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 1.5;
+			c.gridx = 1;
+			c.gridy = 0;
+			c.weighty=.2;
+			pane.add(l, c);
+			
+
+			// ********************************* Labels **************************************** //
+			//********************************************************************************** //
+			
+			l = new JLabel("PMS-Login Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 1.5;
+			c.gridx = 1;
+			c.gridy = 1;
+			c.weighty=.01;
+			c.weightx=.01;
+			pane.add(l, c);
+
+			l = new JLabel("Dashboard Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 1.5;
+			c.gridx = 1;
+			c.gridy = 2;
+			c.weighty=.01;
+			pane.add(l, c);
+
+			l = new JLabel("Demographics Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;
+			c.gridy = 3;
+			c.weighty=.01;
+			pane.add(l, c);
+
+			l = new JLabel("Appointment Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;
+			c.gridy = 4;
+			c.weighty=.01;
+			pane.add(l, c);
+
+			l = new JLabel("Claim Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;
+			c.gridy = 5;
+			c.weighty=.01;
+			pane.add(l, c);
+			
+			
+			l = new JLabel("New Rx Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;
+			c.gridy = 6;
+			c.weighty=.01;
+			pane.add(l, c);
+			
+			l = new JLabel("Daily Tasks Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;
+			c.gridy = 7;
+			c.weighty=.01;
+			pane.add(l, c);
+			
+			l = new JLabel("Patient Information Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;
+			c.gridy = 8;
+			c.weighty=.01;
+			pane.add(l, c);
+			
+			l = new JLabel("PMS Reporting Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;
+			c.gridy = 9;
+			c.weighty=.01;
+			pane.add(l, c);
+			
+			
+			l = new JLabel("WebPro Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;
+			c.gridy = 10;
+			c.weighty=.01;
+			pane.add(l, c);
+			
+			l = new JLabel("CareConnector Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;
+			c.gridy = 11;
+			c.weighty=.01;
+			pane.add(l, c);
+			
+			l = new JLabel("Refer A Colleague Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;
+			c.gridy = 12;
+			c.weighty=.01;
+			pane.add(l, c);
+			
+			l = new JLabel("Administration Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;
+			c.gridy = 13;
+			c.weighty=.01;
+			pane.add(l, c);
+
+			
+			l = new JLabel("SSCM Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;
+			c.gridy = 14;
+			c.weighty=.01;
+			pane.add(l, c);
+			
+			l = new JLabel("User Account Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 1;                                                                                                  
+			c.gridy = 15;
+			c.weighty=.01;
+			pane.add(l, c);
+			
+			
+			// ********************************* Buttons *************************************** //
+			//********************************************************************************** //
+
+			button = new JButton("PMS-Login Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 2;
+			c.gridy = 1;
+
+			c.weighty=.01;
+			pane.add(button, c);
+			button.addActionListener(this);
+			button.setActionCommand("PMS-Login Script");
+			
+			
+			button = new JButton("Dashboard Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 2;
+			c.gridy = 2;
+			c.weighty=.01;
+			pane.add(button, c);
+			
+			button.addActionListener(this);
+			button.setActionCommand("Dashboard Script");
+			
+			
+			button = new JButton("Demographics Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 2;
+			c.gridy = 3;
+			c.weighty=.01;
+			pane.add(button, c);
+			
+			button.addActionListener(this);
+			button.setActionCommand("Demographics Script");
+			
+			
+			
+			button = new JButton("Appointment Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 0.5;
+			c.gridx = 2;
+			c.gridy = 4;
+			c.weighty=.01;
+			pane.add(button, c);
+			
+			button.addActionListener(this);
+			button.setActionCommand("Appointment Script");
+			
+			button = new JButton("Claim Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 2;
+			c.gridx = 2;
+			c.gridy = 5;
+			c.weighty=.01;
+			pane.add(button, c);
+		
+			button.addActionListener(this);
+			button.setActionCommand("Claim Script");
+			
+			
+			button = new JButton("New Rx Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 2;
+			c.gridx = 2;
+			c.gridy = 6;
+			c.weighty=.01;
+			pane.add(button, c);
+			
+		
+			button.addActionListener(this);
+			button.setActionCommand("New Rx Script");
+			
+			
+			button = new JButton("Daily Tasks Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 2;
+			c.gridx = 2;
+			c.gridy = 7;
+			c.weighty=.01;
+			pane.add(button, c);
+			
+		
+			button.addActionListener(this);
+			button.setActionCommand("Daily Tasks Script");
+			
+			
+			button = new JButton("Patient Information Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 2;
+			c.gridx = 2;
+			c.gridy = 8;
+			c.weighty=.01;
+			pane.add(button, c);
+			
+		
+			button.addActionListener(this);
+			button.setActionCommand("Patient Information Script");
+			
+			
+			button = new JButton("PMS Reporting Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 2;
+			c.gridx = 2;
+			c.gridy = 9;
+			c.weighty=.01;
+			pane.add(button, c);
+			
+		
+			button.addActionListener(this);
+			button.setActionCommand("PMS Reporting Script");
+			
+			
+			button = new JButton("WebPro Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 2;
+			c.gridx = 2;
+			c.gridy = 10;
+			c.weighty=.01;
+			pane.add(button, c);
+			
+		
+			button.addActionListener(this);
+			button.setActionCommand("WebPro Script");
+			
+			button = new JButton("CareConnector Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 2;
+			c.gridx = 2;
+			c.gridy = 11;
+			c.weighty=.01;
+			pane.add(button, c);
+			
+		
+			button.addActionListener(this);
+			button.setActionCommand("CareConnector Script");
+
+			
+			button = new JButton("Refer A Colleague Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 2;
+			c.gridx = 2;
+			c.gridy = 12;
+			c.weighty=.01;
+			pane.add(button, c);
+			
+		
+			button.addActionListener(this);
+			button.setActionCommand("Refer A Colleague Script");
+			
+			
+			button = new JButton("Administration Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 2;
+			c.gridx = 2;
+			c.gridy = 13;
+			c.weighty=.01;
+			pane.add(button, c);
+			
+		
+			button.addActionListener(this);
+			button.setActionCommand("Administration Script");
+			
+			
+			button = new JButton("SSCM Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 2;
+			c.gridx = 2;
+			c.gridy = 14;
+			c.weighty=.01;
+			pane.add(button, c);
+		
+			button.addActionListener(this);
+			button.setActionCommand("SSCM Script");
+			
+			
+			button = new JButton("User Account Script");
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.weightx = 2;
+			c.gridx = 2;
+			c.gridy = 15;
+			c.weighty=.01;
+			pane.add(button, c);
+			
+			button.addActionListener(this);
+			button.setActionCommand("User Account Script");
+			
+			
+		}
+		
+		// ********************************* Frame Declaration ****************************** //
+		//********************************************************************************** //	
+		
+		public void createAndShowGUI() 
+		{
+			// Create and set up the window.
+			JFrame frame = new JFrame("Automation Testing Scripts Panel For PMS");
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			// Set up the content pane.
+			addComponentsToPane(frame.getContentPane());
+			// Display the window.
+			frame.pack();
+			frame.setBounds(400, 400, 500, 450);
+			frame.setLocationRelativeTo(null);
+
+			ImageIcon icon = new ImageIcon("C:\\s-icon.png");
+			// iconURL is null when not found
+			frame.setIconImage(icon.getImage());
+
+			frame.setVisible(true);
+			frame.setResizable(false);
+		}
+
+		// ********************************* Buttons Actions ******************************** //
+		//********************************************************************************** //	
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			// TODO Auto-generated method stub
+			switch (e.getActionCommand())
+			{
+			
+			
+			// ******************************* PMS-Login Script ************************** //
+						
+			case "PMS-Login Script":
+			
+			Thread t=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						pms_login_script Login_Check = new pms_login_script ();
+						try {
+							driver = Login_Check.pms_login_script_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RowsExceededException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (BiffException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+					}
+				});
+				t.start();
+				break;
+				
+				
+			// ******************************* Dashboard Script ************************** //
+				
+			case "Dashboard Script":
+				
+				Thread dashboard_t=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						PM_Dashboard dashbord_Check = new PM_Dashboard ();
+						try {
+							driver = dashbord_Check.dashboard_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RowsExceededException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (BiffException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+					}
+				});
+				dashboard_t.start();
+				//JOptionPane.showMessageDialog(null, "Button Appointment Script");
+				break;
+				
+				
+			// ******************************* Demographics Script ************************** //
+				
+			case "Demographics Script":
+				
+				Thread demo_check=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						demographics_script_final demogra_Check = new demographics_script_final ();
+						try {
+							driver = demogra_Check.demo_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RowsExceededException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (BiffException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+					}
+				});
+				demo_check.start();
+				break;
+			
+			// ******************************* Appointment Script ************************** //
+				
+			case "Appointment Script":
+				
+				Thread app_check=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Appointment_Final_Script_Create_auto pmsapp_Check = new Appointment_Final_Script_Create_auto ();
+						try {
+							driver = pmsapp_Check.appointment_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RowsExceededException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (BiffException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+					}
+				});
+				app_check.start();				
+				break;
+				
+			// ******************************* Claim Script ************************** //
+			
+			case "Claim Script":
+				Thread claim_check=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						claim_scripts pmsclaim_Check = new claim_scripts ();
+						try {
+							driver = pmsclaim_Check.claims_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RowsExceededException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (BiffException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+					}
+				});
+				claim_check.start();	
+				
+				break;
+			
+			// ******************************* New Rx Script ************************** //	
+			
+			case "New Rx Script":
+				
+				Thread new_t=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						new_rx newrx_Checker = new new_rx ();
+						try {
+							driver = newrx_Checker.newrx_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}		
+					}
+				});
+				new_t.start();
+				break;	
+			
+			// ******************************* Daily Tasks Script ************************** //
+			
+			case "Daily Tasks Script":
+				Thread daily_t=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Daily_Task daily_Check = new Daily_Task ();
+						try {
+							driver = daily_Check.Daily_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RowsExceededException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (BiffException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+					}
+				});
+				daily_t.start();
+				break;
+				
+			// ******************************* Patient Information Script ************************** //
+			
+			case "Patient Information Script":
+				
+				Thread patient_list_t=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Patient_list pat_list_Checker = new Patient_list ();
+						try {
+							driver = pat_list_Checker.patient_list_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RowsExceededException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (BiffException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+					}
+				});
+				patient_list_t.start();
+				break;
+				
+			// ******************************* PMS Reporting Script ************************** //	
+			
+			case "PMS Reporting Script":
+				
+				Thread report_t=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						reports_scripting report_pms_Check = new reports_scripting ();
+						try {
+							driver = report_pms_Check.pms_report_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RowsExceededException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (BiffException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+					}
+				});
+				report_t.start();
+
+				break;
+				
+			// ******************************* WebPro Script ************************** //	
+			
+			case "WebPro Script":
+				
+				Thread webpro_t=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						webpro_auto webpro_Check = new webpro_auto ();
+						try {
+							driver = webpro_Check.webpro_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RowsExceededException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (BiffException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+					}
+				});
+				webpro_t.start();
+				break;
+				
+			
+			// ******************************* CareConnector Script ************************** //	
+			
+			case "CareConnector Script":
+				Thread carecon_t=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						care_connector_auto careconnect_Check = new care_connector_auto ();
+						try {
+							driver = careconnect_Check.careconnector_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RowsExceededException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (BiffException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+					}
+				});
+				carecon_t.start();
+				
+				break;
+				
+			// ******************************* Refer A Colleague Script ************************** //		
+			
+			case "Refer A Colleague Script":
+				
+				Thread refer_a_check=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						refer_a_colleague refer_a_Check = new refer_a_colleague ();
+						try {
+							driver = refer_a_Check.refer_a_coll_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RowsExceededException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (BiffException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+					}
+				});
+				refer_a_check.start();
+				
+				break;
+				
+			// ******************************* Administration Script ************************** //			
+			
+			case "Administration Script":
+				
+				Thread adminis_check=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						administration_section_auto adminis_Check = new administration_section_auto ();
+						try {
+							try {
+								driver = adminis_Check.administration_checker(driver);
+							} catch (RowsExceededException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (WriteException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (BiffException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}		
+					}
+				});
+				adminis_check.start();
+				break;
+				
+			// ******************************* SSCM Script ************************** //			
+			
+			case "SSCM Script":
+				Thread sscm_check=new Thread( new Runnable() 
+				{
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						ssc_script sscmpms_Check = new ssc_script ();
+						try {
+							driver = sscmpms_Check.SSCM_checker(driver);
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RowsExceededException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (WriteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (BiffException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+					}
+				});
+				sscm_check.start();
+				break;
+				
+			// ******************************* User Account Script ************************** //		
+			
+			case "User Account Script":
+				JOptionPane.showMessageDialog(null, "Button General Testing Scritps");
+				break;
+				
+			default:
+				break;
+			}
+		
+		}
+		
+		public static void main(String[] args)
+		{
+			javax.swing.SwingUtilities.invokeLater(new Runnable()
+			{
+				public void run() {
+					Automation_Pannel f = new Automation_Pannel();
+					f.createAndShowGUI();
+				}
+			});
+		}
+	}
