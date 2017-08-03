@@ -1,0 +1,46 @@
+package PM_Dashboard;
+import java.io.IOException;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+import org.openqa.selenium.WebDriver;
+import excel_append.excel_writing_class;
+import pms_login_script.pms_login_script;
+
+public class PM_Dashboard
+{
+	public WebDriver  dashboard_checker (WebDriver driver) throws InterruptedException, RowsExceededException, WriteException, IOException, BiffException
+	{
+		// TODO Auto-generated method stub
+				pms_login_script Login_Check = new pms_login_script ();
+				driver = Login_Check.pms_login_script_checker(driver);
+				//widgets_checker widgets_checker_Check = new widgets_checker();
+				excel_writing_class excel_write = new excel_writing_class();
+
+				Thread.sleep(1000);
+				excel_write.normal_excel_writing("3", "ctl00_MTBCDynamicWebContentsPlaceHolder_WidgetPanelsLayout_WidgetContainer333984_WidgetTitle", "Name_01",  0, 3 ,driver);
+				//widgets_checker_Check.widgets_report_check("ctl00_MTBCDynamicWebContentsPlaceHolder_WidgetPanelsLayout_WidgetContainer333984_WidgetTitle","Name_01",driver);
+				Thread.sleep(2000);
+				
+				
+				excel_write.normal_excel_writing("4", "ctl00_MTBCDynamicWebContentsPlaceHolder_WidgetPanelsLayout_WidgetContainer333990_WidgetTitle", "Name_01",  0, 4 ,driver);
+				//widgets_checker_Check.widgets_report_check("ctl00_MTBCDynamicWebContentsPlaceHolder_WidgetPanelsLayout_WidgetContainer333990_WidgetTitle","Name_01",driver);
+				Thread.sleep(2000);
+				
+				
+				excel_write.normal_excel_writing("5", "ctl00_MTBCDynamicWebContentsPlaceHolder_WidgetPanelsLayout_WidgetContainer333986_WidgetTitle", "Name_01",  0, 5 ,driver);
+				//widgets_checker_Check.widgets_report_check("ctl00_MTBCDynamicWebContentsPlaceHolder_WidgetPanelsLayout_WidgetContainer333986_WidgetTitle","Name_01",driver);
+				Thread.sleep(2000);
+				
+				
+				excel_write.normal_excel_writing("6", "ctl00_MTBCDynamicWebContentsPlaceHolder_WidgetPanelsLayout_WidgetContainer333988_WidgetTitle", "Name_01",  0, 6 ,driver);
+				//widgets_checker_Check.widgets_report_check("ctl00_MTBCDynamicWebContentsPlaceHolder_WidgetPanelsLayout_WidgetContainer333988_WidgetTitle","Name_01",driver);
+				Thread.sleep(2000);
+				
+				excel_write.normal_excel_writing("7", "ctl00_MTBCDynamicWebContentsPlaceHolder_WidgetPanelsLayout_WidgetContainer333992_WidgetTitle", "Name_01",  0, 7 ,driver);
+				//widgets_checker_Check.widgets_report_check("ctl00_MTBCDynamicWebContentsPlaceHolder_WidgetPanelsLayout_WidgetContainer333992_WidgetTitle","Name_01",driver);
+				Thread.sleep(2000);
+				
+				return driver;
+	}
+}
