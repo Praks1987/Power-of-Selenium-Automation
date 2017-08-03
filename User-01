@@ -1,0 +1,109 @@
+package User_account_auto_play;
+
+import java.io.IOException;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+import org.junit.After;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import pms_login_script.pms_login_script;
+
+public class User_account_auto_play 
+{
+	  private static WebDriver driver;
+	  private static boolean acceptNextAlert = true;
+	  
+	public static void main(String[] args) throws InterruptedException, RowsExceededException, WriteException, IOException, BiffException
+	{
+		// TODO Auto-generated method stub
+
+		pms_login_script Login_Check = new pms_login_script ();
+		driver = Login_Check.pms_login_script_checker(driver);
+		
+		 driver.findElement(By.id("ctl00_A6")).click();
+		 Thread.sleep(1000);
+		 driver.findElement(By.xpath("//*[@id='ctl00_Administration_li']/ul/li[1]/a/div/span")).click();
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_lnkAddNew")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtUserName")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtUserName")).sendKeys("automation");
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtDesignation")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtDesignation")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtDesignation")).sendKeys("Dev Team");
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtLastName")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtLastName")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtLastName")).sendKeys("User");
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtFirstName")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtFirstName")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtFirstName")).sendKeys("David");
+		    
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtPassword")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtPassword")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtPassword")).sendKeys("AAAA@1234");
+		 
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtPasswordConfirm")).click();  
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtPasswordConfirm")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtPasswordConfirm")).sendKeys("AAAA@1234");
+		  
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_btnAddUser")).click();
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_Img1")).click();
+		 driver.findElement(By.id("ctl00_lblSignInUser")).click();
+		 driver.findElement(By.xpath("//*[@id='logOutMain']/ul/li/a/div/span")).click();
+		    
+		driver.findElement(By.id("ctl00_lblSignInUser")).click();
+		 String user_name = driver.findElement(By.id("ctl00_lblSignInUser")).getText();
+		 
+		 
+		 if(driver.findElement(By.id("ctl00_lblSignInUser")).getText().equalsIgnoreCase(user_name))
+		    {
+			 	driver.findElement(By.xpath("//*[@id='logOutMain']/ul/li/a/div/span")).click();
+			 	System.out.println("Hello i am : " + user_name  );
+	            driver.close();
+		    }
+
+		    else
+		    {
+		        System.out.println("Invalid User");
+		        driver.close();
+		    }
+	}
+@After             
+public void Ending() {    
+        try{    
+          driver.close();
+          Thread.sleep(3000);
+           }
+       catch(Exception b){
+          b.getMessage();
+           }
+ }
+private static String closeAlertAndGetItsText() {
+	try {
+    Alert alert = driver.switchTo().alert();
+    String alertText = alert.getText();
+    if (acceptNextAlert) {
+      alert.accept();
+    } else {
+      alert.dismiss();
+    }
+    return alertText;
+  } finally {
+    acceptNextAlert = true;
+  }
+}	
+}
