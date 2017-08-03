@@ -1,0 +1,47 @@
+package webpro;
+
+import java.io.IOException;
+
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import pms_login_script.pms_login_script;
+public class webpro 
+{
+	  private static WebDriver driver;
+	 
+	public static void main(String[] args) throws InterruptedException, RowsExceededException, WriteException, IOException, BiffException 
+	{
+		
+		pms_login_script Login_Check = new pms_login_script ();
+		driver = Login_Check.pms_login_script_checker(driver);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A8']")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_li_webProScheduler_a']/div/span")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A8']")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_li_webProSecurity_a']/div/span")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A8']")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_li_webProPHR_a']/div/span")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A8']")).click();
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_li_icheckSettgins_a']/div/span")).click();
+		Thread.sleep(1000);
+		
+	}
+}
