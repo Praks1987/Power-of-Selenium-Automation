@@ -1,0 +1,43 @@
+package IE_Test_Two;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
+public class IE_Test_Two {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+		System.setProperty("webdriver.ie.driver", "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe");
+		WebDriver driver = new InternetExplorerDriver();
+		driver.get("http://www.google.com");
+		driver.close();
+	
+	}
+
+}
+//====================================================================================================
+package IE_and_Chrome_Test;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+ 
+public class IE_and_Chrome_Test 
+{
+
+	public static void main(String[] args) 
+	
+	{
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver=new ChromeDriver();
+		driver.get("http://www.google.com");
+		driver.close();
+		
+	}
+
+}
