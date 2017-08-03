@@ -1,0 +1,61 @@
+package google_map;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class google_map 
+{
+
+	static WebDriver driver;
+	
+	public static void main(String[] args) throws InterruptedException 
+	
+		{
+		// TODO Auto-generated method stub
+
+		driver = new FirefoxDriver();
+		driver.get("https://www.google.nl/maps");
+	
+		Thread.sleep(1000);
+		driver.findElement(By.id("searchboxinput")).click();
+
+		Thread.sleep(1000);
+		driver.findElement(By.id("searchboxinput")).sendKeys("Münster, Duitsland");
+	    Thread.sleep(2000);
+	    
+	    //driver.findElement(By.id("searchbox-directions")).click();
+	    
+	    //Actions act = new Actions(driver);
+	    //driver.findElement(By.xpath("//*[@id='sbse81']/div[2]/div/div/div[1]/span[2]/span[1]")).click();
+	    
+	    //driver.findElement(By.cssSelector("span..suggest-bold")).click();
+	    //Thread.sleep(1000);
+	    //driver.findElement(By.cssSelector("canvas")).click();
+	    
+	    // driver.findElement(By.cssSelector("div[title='Sam\'s Islamabad Capital']")).click();
+
+	
+	    //driver.findElement(By.id("searchboxinput")).sendKeys("Islamabad, Islamabad Capital Territory, Pakistan");
+	   WebElement webElement = driver.findElement(By.id("searchboxinput"));
+	   webElement.sendKeys("Münster, Duitsland");
+	   webElement.sendKeys(Keys.ENTER);
+		
+	   Thread.sleep(1000);
+		zoomIn();
+	   Thread.sleep(1000);
+	   
+		String print_result =driver.findElement(By.className("section-subheader-large-text")).getText();
+		System.out.println(print_result);
+	}
+	
+	 public static void zoomIn()
+	 {
+		  //To zoom In page 4 time using CTRL and + keys.
+		  for(int i=0; i<1; i++){   
+		  driver.findElement(By.tagName("html")).sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD));
+		  }
+		 }
+}
