@@ -1,0 +1,173 @@
+package user_account;
+
+import static org.junit.Assert.assertEquals;
+import java.util.concurrent.TimeUnit;
+import org.junit.After;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class user_account 
+{
+	
+	  private static WebDriver driver;
+	  private static String baseUrl;
+	  private static boolean acceptNextAlert = true;
+	  private static String User_name_01=null;
+
+	public static void main(String[] args) throws InterruptedException, ClassNotFoundException, SQLException
+	{
+		
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		Connection conn = DriverManager.getConnection("jdbc:sqlserver://10.10.30.41:1433;DatabaseName=MIS_DB;user=mtbcweb;Password=mtbcweb@mtbc");
+		
+		Statement st = conn.createStatement();
+		String sqlStr = "select * from web_users where practice_code = '9090999' and user_name = 'automation'";
+		
+		ResultSet rs = st.executeQuery(sqlStr);
+		
+		while (rs.next()) 
+		{
+		User_name_01 = rs.getString("user_name");	
+		//System.out.println(User_name_01);
+		}
+		
+		driver = new FirefoxDriver();
+		driver.manage().window().maximize();
+		baseUrl = "http://www.mtbc.com/";
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);  
+		driver.get(baseUrl);
+		driver.findElement(By.xpath("(//a[contains(text(),'Login')])[2]")).click();
+		Thread.sleep(1000);
+		
+		/*driver.findElement(By.id("user")).click();
+		driver.findElement(By.id("user")).clear();
+		driver.findElement(By.id("user")).sendKeys("909practice");
+		Thread.sleep(1000);
+		    
+		driver.findElement(By.id("password")).click();
+		driver.findElement(By.id("password")).clear();
+		driver.findElement(By.id("password")).sendKeys("bluesky@1357");
+		Thread.sleep(1000);
+		     
+		driver.findElement(By.id("btnSubmit")).click();
+		
+		driver.findElement(By.id("btnContinue")).click();
+		assertEquals("Thank you for your interest. MTBC’s Credentialing Team has been informed, and they will be contacting you shortly.", closeAlertAndGetItsText());
+		driver.findElement(By.id("ctl00_lblSignInUser")).click();
+		Thread.sleep(1000);
+		
+		
+		 driver.findElement(By.id("ctl00_A6")).click();
+		 Thread.sleep(1000);
+		 driver.findElement(By.xpath("//*[@id='ctl00_Administration_li']/ul/li[1]/a/div/span")).click();
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_lnkAddNew")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtUserName")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtUserName")).sendKeys("automation");
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtDesignation")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtDesignation")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtDesignation")).sendKeys("Dev Team");
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtLastName")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtLastName")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtLastName")).sendKeys("User");
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtFirstName")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtFirstName")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtFirstName")).sendKeys("David");
+		    
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtPassword")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtPassword")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtPassword")).sendKeys("AAAA@1234");
+		 
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtPasswordConfirm")).click();  
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtPasswordConfirm")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txtPasswordConfirm")).sendKeys("AAAA@1234");
+		  
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_btnAddUser")).click();
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_Img1")).click();
+		 driver.findElement(By.id("ctl00_lblSignInUser")).click();
+		 driver.findElement(By.xpath("//*[@id='logOutMain']/ul/li/a/div/span")).click(); */
+		    
+		 driver.findElement(By.id("user")).click();
+		 driver.findElement(By.id("user")).clear();
+		 //driver.findElement(By.id("user")).sendKeys("automation");
+		 driver.findElement(By.id("user")).sendKeys(User_name_01);
+	
+		    
+		    
+		 driver.findElement(By.id("password")).click();
+		 driver.findElement(By.id("password")).clear();
+		 driver.findElement(By.id("password")).sendKeys("AAAA@1234");
+		    
+		 driver.findElement(By.id("btnSubmit")).click();
+		 driver.findElement(By.id("btnContinue")).click();
+		 assertEquals("Thank you for your interest. MTBC’s Credentialing Team has been informed, and they will be contacting you shortly.", closeAlertAndGetItsText());
+		 //driver.findElement(By.id("ctl00_lblSignInUser")).click();
+		 Thread.sleep(1000);
+		 
+		 
+		 driver.findElement(By.id("ctl00_lblSignInUser")).click();
+		 String user_name = driver.findElement(By.id("ctl00_lblSignInUser")).getText();
+		 
+		 
+		 if(driver.findElement(By.id("ctl00_lblSignInUser")).getText().equalsIgnoreCase(user_name))
+		    {
+			 	driver.findElement(By.xpath("//*[@id='logOutMain']/ul/li/a/div/span")).click();
+			 	System.out.println("Hello i am : " + user_name  );
+	            driver.close();
+		    }
+
+		    else
+		    {
+		        System.out.println("Invalid User");
+		        driver.close();
+		    }
+	}
+
+	
+	@After             
+	  public void Ending() {    
+	          try{    
+	            driver.close();
+	            Thread.sleep(3000);
+	             }
+	         catch(Exception b){
+	            b.getMessage();
+	             }
+	   }
+	  private static String closeAlertAndGetItsText() {
+		try {
+	      Alert alert = driver.switchTo().alert();
+	      String alertText = alert.getText();
+	      if (acceptNextAlert) {
+	        alert.accept();
+	      } else {
+	        alert.dismiss();
+	      }
+	      return alertText;
+	    } finally {
+	      acceptNextAlert = true;
+	    }
+	  }	
+	
+}
