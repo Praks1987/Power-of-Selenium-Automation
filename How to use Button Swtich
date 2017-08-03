@@ -1,0 +1,47 @@
+package button_swtich_statement;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+public class button_swtich extends JFrame 
+{
+	
+	  private static final long serialVersionUID = 1L;
+	  private JButton autoButton;
+	  private FlowLayout layout;
+	  
+	  public button_swtich() 
+	  {
+	  super("Button Action Listener Command Test");
+	  layout = new FlowLayout(FlowLayout.CENTER);
+	        setLayout(layout);
+	        setDefaultCloseOperation(3);
+	        setSize(300, 300);
+	        setLocationRelativeTo(null);
+	        
+	        autoButton = new JButton("Auto");
+	        add(autoButton);
+	        autoButton.addActionListener(new ActionListener()
+	        {
+	            @Override
+	            public void actionPerformed(ActionEvent e)
+	            {
+	            	//System.out.println("Hello I am here 01");
+	            	JOptionPane.showMessageDialog(null,"Button Pressed");
+	            }
+	        });
+	        }
+
+	    public static void main(String... args)
+	    {
+	    javax.swing.SwingUtilities.invokeLater(new Runnable() 
+	    {
+	            @Override
+	    public void run() 
+	            {
+	                new button_swtich().setVisible(true);
+	            }
+	        });}}
