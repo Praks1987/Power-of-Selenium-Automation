@@ -1,0 +1,32 @@
+package PM_Dashboard;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+public class widgets_checker {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public void widgets_report_check (String widget_id, String widget_name , WebDriver driver)
+
+	{
+		
+		String widget_id_check = widget_id;
+		
+		if(driver.findElement(By.xpath("//*[@id='"+ widget_id_check +"']")).getText().equalsIgnoreCase(widget_name))
+
+		{
+		 	System.out.println("Yes it Widget:" + widget_name);
+	    }
+
+	    else
+	    {
+	    	System.out.println("No its not Widget");
+	    }
+	}
+}
