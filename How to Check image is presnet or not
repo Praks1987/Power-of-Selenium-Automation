@@ -1,0 +1,113 @@
+package refer_a_colleague;
+import java.io.IOException;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+import org.junit.After;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import pms_login_script.pms_login_script;
+
+public class refer_a_colleague 
+{
+	private static WebDriver driver;
+
+	
+	public WebDriver  refer_a_coll_checker (WebDriver driver) throws InterruptedException, RowsExceededException, WriteException, IOException, BiffException 
+	{
+		// TODO Auto-generated method stub
+	
+	
+		pms_login_script Login_Check = new pms_login_script ();
+		driver = Login_Check.pms_login_script_checker(driver);
+		
+		driver.findElement(By.id("ctl00_hypRefer")).click();
+		
+		driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_yourname")).click();
+		driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_yourname")).clear();
+		driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_yourname")).sendKeys("MTBC Test");
+		Thread.sleep(1000); 
+		
+		 new Select(driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_DDlSalutation"))).selectByVisibleText("Mr.");
+		 Thread.sleep(1000); 
+		 
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_fname")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_fname")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_fname")).sendKeys("MTBC TEST");
+		 Thread.sleep(1000); 
+		 
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_lname")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_lname")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_lname")).sendKeys("MTBC TEST");
+		 Thread.sleep(1000); 
+		 
+		 new Select(driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_DDlTitle"))).selectByVisibleText("MD");
+		 Thread.sleep(1000); 
+		 new Select(driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_ddl_specialty"))).selectByVisibleText("Acupuncture");
+		 
+		 Thread.sleep(1000); 
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_email")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_email")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_email")).sendKeys("kalimriaz@mtbc.com");
+	
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_phone")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_phone")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_phone")).sendKeys("9876543214");
+		 
+		 Thread.sleep(1000); 
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_pracname")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_pracname")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_pracname")).sendKeys("MTBC TEST");
+		 
+		 Thread.sleep(1000); 
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_address")).click();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_address")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_address")).sendKeys("7 Clyde Road");
+		 
+		 Thread.sleep(1000); 
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_city")).click();    
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_city")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_city")).sendKeys("Somerset");
+		 
+		 Thread.sleep(1000); 
+		 new Select(driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_DDL_State"))).selectByVisibleText("NJ");
+		 
+		 Thread.sleep(1000);
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_zip")).click(); 
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_zip")).clear();
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_txt_zip")).sendKeys("08873");
+		 
+		 driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_referal_Button1")).click();
+		 Thread.sleep(1000);
+		 
+		 WebElement ImageFile = driver.findElement(By.id("imgThanksReferal"));
+		 Thread.sleep(1000);
+		 
+		 Boolean ImagePresent = (Boolean) ((JavascriptExecutor)driver).executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0", ImageFile);
+	        if (!ImagePresent)
+	        {
+	             System.out.println("Image not displayed.");
+	             
+	        }
+	        else
+	        {
+	            System.out.println("Image displayed.");
+	            driver.findElement(By.id("ctl00_Img1")).click();
+	            driver.close();
+	        }
+			return driver;
+	}
+	@After             
+	  public void Ending() {    
+	          try{    
+	            driver.close();
+	            Thread.sleep(3000);
+	             }
+	         catch(Exception b){
+	            b.getMessage();
+	             }
+	   }
+	}
