@@ -1,0 +1,138 @@
+package claim_scripts;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import java.io.IOException;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
+import org.junit.After;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import pms_login_script.pms_login_script;
+
+public class claim_scripts 
+{
+	  private static WebDriver driver;
+	  private static boolean acceptNextAlert = true;
+	  private StringBuffer verificationErrors = new StringBuffer();
+	  
+	public static void main(String[] args) throws InterruptedException, RowsExceededException, WriteException, IOException, BiffException 
+	{
+		// TODO Auto-generated method stub
+		
+		pms_login_script Login_Check = new pms_login_script ();
+		driver = Login_Check.pms_login_script_checker(driver);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_A3']")).click();Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@id='ctl00_mainnavigation1_li_PatientList']/div/span")).click();
+		
+		driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_txt_SearchField")).sendKeys("Test");
+		driver.findElement(By.id("btnJsonSearch")).click();
+		
+		//"btnJsonSearch"
+		//*[@id="search"]/table/tbody/tr[2]/td[2]/table/tbody/tr/td[6]/div[1]/span
+		//"ctl00_MTBCDynamicWebContentsPlaceHolder_txt_SearchField"
+		//driver.findElement(By.xpath("//*[@id='search']/table/tbody/tr[2]/td[2]/table/tbody/tr/td[6]/div[1]/span")).click();
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement element = driver.findElement(By.id("acnt0"));
+		js.executeScript("arguments[0].click();",element);
+		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_MTBCDynamicWebContentsPlaceHolder_LnkNewClaim']")).click();
+		Thread.sleep(1000);
+	
+	    driver.findElement(By.id("A15_0")).click();
+
+	    driver.findElement(By.id("1050F_1")).click();
+	    Thread.sleep(1000);
+	 
+	    driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_chk_selfpay")).click();
+	    
+	    new Select(driver.findElement(By.id("ddlPOS_1050F_1"))).selectByVisibleText("OF");Thread.sleep(1000);
+	    new Select(driver.findElement(By.id("ddlPOS_32504_2"))).selectByVisibleText("OF");Thread.sleep(1000);
+	    
+	    js.executeScript("scroll(0, 250);");
+	    
+	    driver.findElement(By.id("ctl00_MTBCDynamicWebContentsPlaceHolder_btn_claim_save")).click(); Thread.sleep(1000);
+	    
+	   if(isAlertPresent()) 
+	   {
+	   	assertTrue(closeAlertAndGetItsText().matches("^A claim has already been created for this DOS\\. Do you want to create another claim[\\s\\S]$"));
+	   	System.out.println("Hello i am in alert");
+	    
+	   	Thread.sleep(1000);
+	    js.executeScript("scroll(0, -250);");
+	    Thread.sleep(1000);
+	    
+	    if(driver.findElement(By.xpath("//*[@id='vaildationSummaryDiv']")).getText().equalsIgnoreCase("Saved Successfully."))
+    	{
+    		driver.findElement(By.id("ctl00_Img1")).click();
+    		System.out.println("Claim Created");}
+	    else 
+	        	{System.out.println("Claim Not Created esle 1");} 
+	   	}
+
+	    else 
+	    {System.out.println("I am Not from Alert first state");
+	    
+	    if(driver.findElement(By.xpath("//*[@id='vaildationSummaryDiv']")).getText().equalsIgnoreCase("Saved Successfully."))
+    	{
+    		driver.findElement(By.id("ctl00_Img1")).click();
+    		System.out.println("Claim Created");}
+	    else 
+	        	{System.out.println("Claim Not Created else2");}
+	    }
+	}
+	
+	 @After
+	  public void tearDown() throws Exception {
+	    driver.quit();
+	    String verificationErrorString = verificationErrors.toString();
+	    if (!"".equals(verificationErrorString)) {
+	      fail(verificationErrorString);
+	    }
+	  }
+	@After             
+	  public void Ending() {    
+	          try{    
+	            driver.close();
+	            Thread.sleep(3000);
+	             }
+	         catch(Exception b){
+	            b.getMessage();
+	             }
+	   }
+	private static boolean isAlertPresent() 
+	{
+	    try {
+	      driver.switchTo().alert();
+	      return true;
+	    } catch (NoAlertPresentException e) {
+	      return false;
+	    }
+	  }
+
+	  private static String closeAlertAndGetItsText() {
+		try {
+	      Alert alert = driver.switchTo().alert();
+	      String alertText = alert.getText();
+	      if (acceptNextAlert) {
+	        alert.accept();
+	      } else {
+	        alert.dismiss();
+	      }
+	      return alertText;
+	    } finally {
+	      acceptNextAlert = true;
+	    }
+	  }	
+}
