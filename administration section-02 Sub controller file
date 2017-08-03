@@ -1,0 +1,56 @@
+package administration_section;
+import java.io.IOException;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class administration_checker 
+{
+
+public void admin_check (String i ,String report_id, String report_name , WebDriver driver , int col_report , int row_report , WritableSheet sheet) throws InterruptedException ,IOException, RowsExceededException, WriteException
+
+{
+	String test = report_id;
+
+    Label sr_no =null; 
+    Label Report_name =null; 
+    Label testcase_status =null;
+    
+    //*[@id="ctl00_lbl_reporttitle"]
+    
+	//String page_name = driver.findElement(By.xpath("//*[@id='"+test+"']")).getText();
+	//System.out.println(page_name);
+    
+	if(driver.findElement(By.xpath("//*[@id='"+test+"']")).getText().equalsIgnoreCase(report_name))
+    {
+		//driver.findElement(By.id("BtnDisplay")).click();
+		System.out.println("Report Name :" + report_name);
+		
+		sr_no= 					new Label (col_report		, row_report 	, 	i);
+		Report_name= 			new Label (col_report + 1	, row_report	, 	report_name);
+		testcase_status= 		new Label (col_report + 2	, row_report 	, 	"Pass");
+		
+		sheet.addCell(sr_no);
+		sheet.addCell(Report_name);
+		sheet.addCell(testcase_status);
+		System.out.println("After Excel Write");
+		
+    }
+
+	else
+    {
+		sr_no= 					new Label (col_report	, row_report 	, 	i);
+		Report_name= 			new Label (col_report+1	, row_report	, 	report_name);
+		testcase_status= 		new Label (col_report+2	, row_report 	, 	"Fail");
+		
+		sheet.addCell(sr_no);
+		sheet.addCell(Report_name);
+		sheet.addCell(testcase_status);
+		
+		System.out.println("I am not here in second class");
+    }
+	} 
+}
