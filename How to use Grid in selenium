@@ -1,0 +1,50 @@
+package test;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+public class test 
+{
+	static WebDriver driver;
+	static String baseUrl;
+
+	public static void main(String[] args) throws InterruptedException, MalformedURLException
+	{
+
+	String nodeUrl , nodeUrl02;
+	baseUrl 	= "http://www.google.com";
+	nodeUrl 	= "http://IP:PORT/wd/hub";
+	nodeUrl02 	= "http://IP:PORT/wd/hub";
+
+	DesiredCapabilities capability = DesiredCapabilities.firefox();
+	capability.setBrowserName("firefox");
+	capability.setPlatform(Platform.WINDOWS);
+
+	driver = new RemoteWebDriver(new URL(nodeUrl),capability);
+	driver.manage().window().maximize();
+	//driver.manage().timeouts().implicitlyWait(2, TimeUnit.MINUTES);
+	
+	driver.get(baseUrl);
+
+	System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+	DesiredCapabilities capability1 = DesiredCapabilities.chrome();
+	capability.setBrowserName("chrome");
+	capability.setPlatform(Platform.WINDOWS);
+	driver = new RemoteWebDriver(new URL(nodeUrl02),capability1);
+	
+	driver.get(baseUrl);
+	
+	
+	/*System.setProperty("webdriver.ie.driver", "C:\\IEDriverServer.exe");
+	DesiredCapabilities capability2 = DesiredCapabilities.internetExplorer();
+	capability.setBrowserName("internetExplorer");
+	capability.setPlatform(Platform.WINDOWS);
+	driver = new RemoteWebDriver(new URL(nodeUrl),capability2);
+	driver.get(baseUrl);*/
+	
+
+	}
+}
