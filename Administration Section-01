@@ -1,0 +1,88 @@
+package administration_section;
+import java.io.File;
+import java.io.IOException;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import pms_login_script.pms_login_script;
+import excel_sheet_writing.excel_sheet_writing;
+
+public class administration_section
+{
+
+	private static WebDriver driver;
+ 	
+	public static void main(String[] args) throws InterruptedException, RowsExceededException, WriteException, IOException, BiffException 
+	{
+		//administration_checker pms_admin_pass   = 		new administration_checker();
+		excel_sheet_writing excel_writing_token = 		new excel_sheet_writing();
+		
+		WritableWorkbook workbook = Workbook.createWorkbook(new File("D:/pms_login_write.xls"));
+		WritableSheet sheet = workbook.createSheet("Sheet1", 0);
+		
+		Label  Sr_no_header = 				new Label (0, 0  , "Sr.No");
+		Label  report_name_header= 			new Label (1, 0  , "Pass Name");
+		Label  report_status_header= 		new Label (2, 0  , "Test Case Status");
+		
+		sheet.addCell(Sr_no_header);
+		sheet.addCell(report_name_header);
+		sheet.addCell(report_status_header);
+		
+		pms_login_script Login_Check = new pms_login_script ();
+		driver = Login_Check.pms_login_script_checker(driver);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_A6']")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@id='ctl00_li_SpecialInstruction_a']/div/span")).click();
+		Thread.sleep(2000);
+		excel_writing_token.excel_method("1","ctl00_lbl_reporttitle", "Special Instructions" , driver , 0 , 1 , sheet);
+
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_A6']")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id='ctl00_li_RefPhySetup']/a/div/span")).click();
+		Thread.sleep(2000);
+		excel_writing_token.excel_method("2" , "ctl00_lbl_reporttitle", "Referring Physician Setup" , driver , 0 , 2 , sheet);
+	
+		
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@id='ctl00_A6']")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id='ctl00_li_ARF']/a/div/span")).click();
+		Thread.sleep(2000);
+		excel_writing_token.excel_method("3" ,"ctl00_lbl_reporttitle", "Agreement Request Form | MTBC" , driver , 0 , 3 , sheet);
+		
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_A6']")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id='ctl00_li_BAA']/a/div/span ")).click();
+		Thread.sleep(2000);
+		excel_writing_token.excel_method("4" , "ctl00_lbl_reporttitle", "Business Associate Agreement" , driver , 0 , 4 , sheet);
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_A6']")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id='ctl00_Administration_li']/ul/li[1]/a/div/span")).click();
+		Thread.sleep(2000);
+		excel_writing_token.excel_method("5" ,"ctl00_lbl_reporttitle", "Account Manager" , driver , 0 , 5 , sheet);
+		
+		
+		
+		driver.findElement(By.xpath("//*[@id='ctl00_A6']")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id='ctl00_Administration_li']/ul/li[21]/a/div/span")).click();
+		//pms_admin_pass.admin_check("6" , "ctl00_lbl_reporttitle", "Practice Profile" , driver , 0 , 6 , sheet);
+		excel_writing_token.excel_method("6" , "ctl00_lbl_reporttitle", "Practice Profile" , driver , 0 , 6 , sheet);
+		
+		 workbook.write(); 
+         workbook.close();
+         
+         driver.findElement(By.id("ctl00_Img1")).click();
+         driver.close();
+	}
+}
