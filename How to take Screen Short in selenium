@@ -1,0 +1,30 @@
+package screen_short_final;
+
+import java.io.File;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+
+public class screen_short_final {
+
+	public static void main(String[] args) throws IOException 
+	
+	{
+		// TODO Auto-generated method stub
+		int count=0;
+		 WebDriver driver = new FirefoxDriver();
+		 driver.get("http://www.mtbc.com");
+		 
+		 //String actualTitle = driver.getTitle();
+		 //System.out.println(actualTitle);
+		 
+		 File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		 FileUtils.copyFile(scrFile, new File("c:\\selenium\\Home_page"+count+".png"));
+		 ++count;
+		 driver.close();
+	}
+
+}
