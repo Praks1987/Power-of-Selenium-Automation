@@ -1,0 +1,53 @@
+import java.util.concurrent.TimeUnit;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class Task2 {
+	static WebDriver driver;
+	int rows;
+	int columns;
+	
+	@BeforeClass
+	public static void setup()
+	{
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\mobeenatif\\Desktop\\geckodriver-v0.14.0-win64\\chromedriver.exe");
+		driver=new ChromeDriver();
+	}
+	@Test
+	public void test()
+	{
+		driver.manage().window().maximize();
+		driver.get("http://only-testing-blog.blogspot.in/2013/09/test.html");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		rows=driver.findElements(By.cssSelector("#post-body-6522850981930750493 > div:nth-child(1) > table > tbody > tr")).size();
+		columns=driver.findElements(By.cssSelector("#post-body-6522850981930750493 > div:nth-child(1) > table > tbody > tr:nth-child(1) > td")).size();
+
+		System.out.println("Numbers of Rows = "+rows);
+
+		System.out.println("Numbers of Columns = "+columns);
+
+		for(int i=1;i<=rows;i++)
+		{
+			for(int j=1;j<=columns;j++)
+			{
+				System.out.print(driver.findElement(By.cssSelector("#post-body-6522850981930750493 > div:nth-child(1) > table > tbody > tr"+":nth-child("+i+")"+" > td:nth-child("+j+")")).getText()+"  ");
+			}
+			System.out.println();
+		}
+		 	
+	}
+	
+	@AfterClass
+	public static void cleanup()
+	{
+		driver.quit();
+	}
+
+}
