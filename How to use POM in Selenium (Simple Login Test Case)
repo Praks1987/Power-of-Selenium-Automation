@@ -1,0 +1,55 @@
+Child Class : POM objects
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+public class pom_wo_pf 
+{
+	By username=By.id("email");
+	By password=By.id("pass");
+	public WebDriver driver;
+	public void POM_FB (WebDriver driver) throws InterruptedException
+	{
+		
+		driver.findElement(username).click();
+		driver.findElement(username).sendKeys("test_test@yahoo.com");
+		driver.findElement(password).click();
+		driver.findElement(password).sendKeys("Password");
+		
+		if(driver.findElements(By.id("u_0_5")).size() != 0)
+		 {
+			 System.out.println("Element is Present");
+			 driver.findElement(By.id("u_0_5")).click();
+			 }
+		 	else if(driver.findElements(By.id("u_0_2")).size() != 0)
+			 {
+			 System.out.println("Element is Absent");
+			 driver.findElement(By.id("u_0_2")).click();
+			}
+		 	else
+			{System.out.println("Element is Absent 02");}
+	}
+}
+
+
+Step 2: Now Create main class and call your child class 
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class pom_use 
+{
+	static WebDriver driver;
+	//static String driverPath = "c:\\Selenium_drivers\\geckodriver.exe";
+	
+	public static void main(String[] args) throws InterruptedException
+	{
+		//System.setProperty("webdriver.gecko.driver", driverPath);
+		driver=new FirefoxDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.facebook.com/");
+		
+		pom_wo_pf pom_fb_check = new pom_wo_pf();
+		pom_fb_check.POM_FB(driver);
+	}	
+}
+
